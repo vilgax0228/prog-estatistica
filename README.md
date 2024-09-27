@@ -110,7 +110,10 @@ No R um *vetor* é uma estrutura de dados que armazena uma coleção de objetos 
 parei na página 19.
 
 ---
-**Exercícios - Capítulo 1: Classes e Objetos**
+**Exercícios versão livro - Capítulo 1: Classes e Objetos**
+
+---
+**Exercícios versão professor - Capítulo 1: Classes e Objetos**
 
 1. uso da função *rbind()* para criar a matriz A. Depois use as funções *rownames()* e *colnames()* e dê os seguintes nomes as linhas: linha1 (para a primeira linha), e linha2(para a segunda linha), faça o mesmo para as colunas usando os nomes: col1, col2, etc.
 ```R
