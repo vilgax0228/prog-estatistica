@@ -201,8 +201,65 @@ A função c() serve não só para concatenar objetos em um vetor, como também 
 ```
 **obs:** aqui nesse caso, é mais fácil de se transformar números em strings que strings de texto em números.
 
+Temos ainda outras maneiras de criar um vetor:
+```R
+> 1:10
+[1] 1 2 3 4 5 6 7 8 9 10
+> seq(1, 20, by=2)
+[1] 1  3  5  7  9 11 13 15 17 19
+> rep(0, times=0)
+[1] 0 0 0 0
+```
 
+Uma última maneira de se iniciar um vetor quando já se sabe o tipo, mas ainda não sabemos os elementos:
+```R
+> v1 <- numeric(2)
+> v1
+[1] 0 0
+> v2 <- character(5)
+> v2
+[1] "" "" "" "" ""
+> v3 <- logical(4)
+> v3
+[1] FALSE FALSE FALSE FALSE
+```
 
+É possível usar os operadores e funções das classes em um vetor de tamanho maior que 1.
+
+Os operadores e funções são aplicados a cada posição do vetor e retornam um vetor como resposta.
+```R
+> a <- seq(1:10)
+> b <- rep(2, 10)
+> a
+[1] 1 2 3 4 5 6 7 8 9 10
+> b
+[1] 2 2 2 2 2 2 2 2 2 2
+> a+b
+[1]  3  4  5  6  7  8  9 10 11 12
+> a-b
+[1] -1  0  1  2  3  4  5  6  7  8
+> a*b
+[1]  2  4  6  8 10 12 14 16 18 20
+> a/b
+[1] 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0
+> exp(a)
+[1]     2.718282     7.389056    20.085537
+[4]    54.598150   148.413159   403.428793
+[7]  1096.633158  2980.957987  8103.083928
+[10] 22026.465795
+```
+Outros exemplos:
+```R
+> a <- c("a", "aa", "aaa")
+> b <- c("b", "bb", "bbb")
+> paste(a, b)
+[1] "a b"     "aa bb"   "aaa bbb"
+> a1 <- c("a", "a", "a")
+> a==a1
+[1]  TRUE FALSE FALSE
+```
+
+**Matrizes**
 
 
 
