@@ -105,9 +105,108 @@ Nesse caso, os objetos iguais a TRUE serão interpretados como o número 1 e os 
 
 **Vetores**
 
-No R um *vetor* é uma estrutura de dados que armazena uma coleção de objetos em que todos são de uma mesma classe.
+No R um **vetor** é uma *estrutura de dados* que armazena uma coleção de objetos em que todos são de uma mesma classe.
 
-parei na página 19.
+A maneira mais simples de se criar um vetor é usando a função **c()**, que combina objetos formando um vetor.
+```R
+> a <- c(1, 2, 3)
+> a
+[1] 1 2 3
+> b <- c("a", "b")
+> b
+[1] "a" "b"
+> c <- c(T, T, F, F)
+> c
+[1] TRUE  TRUE FALSE FALSE
+```
+O R trata qualquer objeto como um vetor.
+
+A função **length()** retorna o tamanho de um vetor.
+```R
+> length(a)
+[1] 3
+> length(b)
+[1] 2
+> length(c)
+[1] 4
+```
+Para acessarmos a posição (index) de um vetor usamos os colchetes [].
+```R
+> a[1]
+[1] 1
+> b[2]
+[1] "b"
+> c[3]
+[1] FALSE
+```
+Se tentamos acessar uma posição que não tenha sido definida, a resposta será *NA* (not available).
+```R
+> a[5]
+[1] NA
+```
+Existem outras maneiras de se criar um vetor.
+
+Uma delas é usando o colchetes [] para alocarmos uma posição específica.
+```R
+> d <- 1
+> d
+[1] 1
+> d[2] <- 3
+> d[4] <- 5
+> d
+[1] 1 3 NA 5
+> d[4] <- 7
+> d[3] <- 5
+> d
+[1] 1 3 5 7
+```
+No exemplo anterior o objeto d foi iniciado como um vetor de tamanho 1 da classe "numeric".
+
+Temos também a possibilidade de iniciar um objeto como vazio ou nulo.
+```R
+> e <- NULL
+> e
+NULL
+> e[2] <- 4
+> e
+[1] NA 4
+> e[1] <- 2
+> e
+[1] 2 4
+```
+
+A função c() serve não só para concatenar objetos em um vetor, como também para concatenar um vetor com um novo objeto ou concatenar dois objetos, cada um já construído como um vetor.
+```R
+> a <- c(1, 2, 3)
+> a
+[1] 1 2 3
+> c(a, 4)  # colocando um elemento no final do vetor
+[1] 1 2 3 4
+> c(0, a)  # colocando um elemento no início do vetor
+[1] 0 1 2 3
+> c(0, a, 4)
+[1] 0 1 2 3 4
+
+> e <- c(2, 4)
+> e
+[1] 2 4
+> c(a, e)  # concatenando dois vetores
+[1] 0 1 2 3 4 2 4
+
+> b <- c("a", "b")
+> b
+[1] "a" "b"
+> c(a, b)  # concatenando dois vetores de classes diferentes, uma delas é transformada por coerção
+[1] "0" "1" "2" "3" "4" "a" "b"
+```
+**obs:** aqui nesse caso, é mais fácil de se transformar números em strings que strings de texto em números.
+
+
+
+
+
+
+
 
 ---
 **Exercícios versão livro - Capítulo 1: Classes e Objetos**
@@ -150,7 +249,7 @@ linha2   20    6    1   10    6
 [5,]    5   11   17   23   29   35
 [6,]    6   12   18   24   30   36
 ```
-4. Crie as matrizes A e B e use o operador *%*%* que fornece a multiplicação entre duas matrizes.
+4. Crie as matrizes A e B e use o operador %*% que fornece a multiplicação entre duas matrizes.
 ```R
 > A <- c(3, -1, 0, -3, -5, 4)
 > dim(A) <- c(2, 3)
