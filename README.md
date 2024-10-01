@@ -1,8 +1,8 @@
 ## Capítulo 1: Objetos e Classes
 
-Uma função muito usada com objetos da classe "character" é a função **paste()**.
+Uma função muito usada com objetos da classe *character* é a função **paste()**.
 
-Ela recebe como argumento de entrada objetos do tipo "character" e retorna um *único* objeto, também do tipo "character", que é definido pela *concatenação* dos objetos passados como entrada.
+Ela recebe como argumento de entrada objetos do tipo "character" e retorna um *único* objeto, também do tipo character, que é definido pela *concatenação* dos objetos passados como entrada.
 
 Quando chamamos o comando paste() podemos indicar como os objetos serão separados na concatenação usando o argumento de entrada *sep*. Se este argumento não for definido, ele será considerado como espaço.
 ```R
@@ -130,7 +130,7 @@ A função **length()** retorna o tamanho de um vetor.
 > length(c)
 [1] 4
 ```
-Para acessarmos a posição (index) de um vetor usamos os colchetes [].
+Para acessarmos a posição (*index*) de um vetor usamos os colchetes [].
 ```R
 > a[1]
 [1] 1
@@ -160,7 +160,7 @@ Uma delas é usando o colchetes [] para alocarmos uma posição específica.
 > d
 [1] 1 3 5 7
 ```
-No exemplo anterior o objeto d foi iniciado como um vetor de tamanho 1 da classe "numeric".
+No exemplo anterior o objeto *d* foi iniciado como um vetor de tamanho 1 da classe "numeric".
 
 Temos também a possibilidade de iniciar um objeto como vazio ou nulo.
 ```R
@@ -261,7 +261,232 @@ Outros exemplos:
 
 **Matrizes**
 
+Dentro do R existe uma classe chamada *matrix*, que guarda objetos do mesmo tipo em forma de matriz, ou seja, guarda os objetos por linhas e colunas.
 
+Mesmo sendo uma estrutura de dados em que cada objeto pode ser identificado por um par de índices, como no caso do vetor, diferentemente do vetor as matrizes são uma classe no R.
+
+Para criar um novo objeto do tipo matrix podemos usar a função matrix(data=, nrow=, ncol=, byrow=, dimnames=).
+
+| Nome | Descrição |
+|-------------|-------------|
+| data | vetor com os objetos que serão alocados dentro da matrix |
+| ncol | número de colunas da matriz |
+| nrow | número de linhas da matriz |
+| byrow | TRUE ou FALSE, que indica se os objetos serão alocados por linha ou por coluna |
+| dimnames | uma lista com os nomes para as linhas e colunas da matriz |
+
+Se alguma das informações não for preenchida, será considerado o valor padrão para cada entrada.
+
+Alguns exemplos de como criar matrizes:
+```R
+> m1 <- matrix(c(1, 2, 3, 11, 12, 13), nrow=2, ncol=3, byrow=TRUE)
+> m1
+     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]   11   12   13
+> class(m1)
+[1] "matrix" "array"
+
+> m2 <- matrix(c(1, 2, 3, 11, 12, 13), nrow=3, ncol=2, byrow=TRUE)
+> m2
+     [,1] [,2]
+[1,]    1    2
+[2,]    3   11
+[3,]   12   13
+
+> m3 <- matrix(c(1, 2, 3, 11, 12, 13), nrow=3, ncol=2)
+> m3
+     [,1] [,2]
+[1,]    1   11
+[2,]    2   12
+[3,]    3   13
+```
+
+Os elementos de uma matriz também são acessados usando os colchetes [], mas diferentemente do vetor, aqui temos que informar o índice da linha e da coluna que queremos acessar, separados por vírgula.
+```R
+> m3[2,1]
+[1] 2
+```
+Podemos usar os colchetes ainda para acessar uma linha inteira ou coluna inteira da matriz. Nesse caso, o objeto retornado será um vetor dos objetos da linha ou coluna da matriz.
+```R
+> m3[1,]
+[1]  1 11
+> m3[,2]
+[1] 11 12 13
+```
+Se quisermos o número de linhas de uma matriz , podemos usar a função nrow(), e se quisermos o número de coluns usamos a função ncol().
+```R
+> nrow(m3)
+[1] 3
+> ncol(m3)
+[1] 2
+```
+
+**Listas**
+
+Um objeto da classe *list* se diferencia de um vetor pelo fato de poder guardar objetos de tipos diferentes. Além disso, as listas definem uma classe, e um vetor não.
+
+Para criarmos uma lista vamos usar a função **list()**:
+```R
+> l1 <- list()
+> l1
+list()
+```
+O objeto l1 criado representa uma lista vazia.
+
+Se dentro dos parênteses colocarmos uma sequência de objetos, a lista criada será composta por tais objetos.
+```R
+> l2 <- list(1, "a", TRUE)
+> l2
+[[1]]
+[1] 1
+
+[[2]]
+[1] "a"
+
+[[3]]
+[1] TRUE
+
+> class(l2)
+[1] "list"
+
+> l3 <- list(c(1, 2, 3), c(1, 1, 1, 1), TRUE, c("A", "a"))
+> l3
+[[1]]
+[1] 1 2 3
+
+[[2]]
+[1] 1 1 1 1
+
+[[3]]
+[1] TRUE
+
+[[4]]
+[1] "A" "a"
+```
+
+Podemos também criar uma lista de listas:
+```R
+> l4 <- list(l1, l2, l3)
+> l4
+[[1]]
+list()
+
+[[2]]
+[[2]][[1]]
+[1] 1
+
+[[2]][[2]]
+[1] "a"
+
+[[2]][[3]]
+[1] TRUE
+
+
+[[3]]
+[[3]][[1]]
+[1] 1 2 3
+
+[[3]][[2]]
+[1] 1 1 1 1
+
+[[3]][[3]]
+[1] TRUE
+
+[[3]][[4]]
+[1] "A" "a"
+```
+
+Enquanto usamos colchetes simples [] para acessar a posição de um vetor, para acessar as posições de uma lista usaremos colchetes duplo [[]].
+```R
+> l3[[2]]
+[1] 1 1 1 1
+> l3[[1]][2]
+[1] 2
+```
+
+Para saber o tamanho de uma lista, também podemos usar o comando length().
+```R
+> length(l1)
+[1] 0
+> length(l2)
+[1] 3
+> length(l3[[2]])  # tamanho do segundo objeto da lista 3
+[1] 4
+> length(l4)
+[1] 3
+```
+
+Da mesma forma que em um vetor, novas posições de uma lista podem ser alocadas após a criação do objeto. No caso das listas, usaremos o colchete duplo para isso.
+
+Além de alocar novas posições, ele também serve para modificar posições já existentes.
+```R
+> l2[[4]] <- c(1, 2, 3)
+> l2
+[[1]]
+[1] 1
+
+[[2]]
+[1] "a"
+
+[[3]]
+[1] TRUE
+
+[[4]]
+[1] 1 4 8
+```
+
+**Data frame**
+
+Trata-se de um objeto que guarda dados em forma bidimensional, como uma tabela.
+
+Cada valor guardado em objetos desse tipo pode ser acessado pelos índices de linha e coluna em que ele está alocado.
+
+Para criar um novo objeto do tipo *data.frame* podemos usar a função **data.frame()**, e dentro dos parênteses indicamos as colunas do objeto em forma de um vetor.
+
+**obs:** cada vetor que define uma coluna tem que ter a mesma dimensão, que será o número de linhas do objeto data.frame criado.
+```R
+> dados <- data.frame(c("Maria", "Daniel", "Vicente", "Laura"), c(4, 5, 1, 3), c(F, F, F, T), stringsAsFactors=FALSE)
+> class(dados)
+[1] "data.frame"
+> dados
+  c..Maria....Daniel....Vicente....Laura.. c.4..5..1..3. c.F..F..F..T.
+1                                    Maria             4         FALSE
+2                                   Daniel             5         FALSE
+3                                  Vicente             1         FALSE
+4                                    Laura             3          TRUE
+```
+Foi criado o objeto dados do tipo data.frame.
+
+O comando *stringsAsFactors=FALSE* faz com que os objetos do tipo character não sejam convertidos para o tipo *factor*.
+
+Para nomear as colunas, ou editar seus nomes, e assim facilitar a manipulação dos dados, você pode usar a função *names()*.
+
+Essa função serve tanto para retornar os nomes das colunas de um objeto data.frame quanto para editá-los.
+```R
+> names(dados)
+[1] "c..Maria....Daniel....Vicente....Laura.."
+[2] "c.4..5..1..3."                           
+[3] "c.F..F..F..T."
+
+> names(dados) <- c("nome", "periodo", "res.niteroi")
+> names(dados)
+[1] "nome"        "periodo"     "res.niteroi"
+
+> dados
+     nome periodo res.niteroi
+1   Maria       4       FALSE
+2  Daniel       5       FALSE
+3 Vicente       1       FALSE
+4   Laura       3        TRUE
+```
+
+Uma alternativa seria criar o objeto data.frame já com os nomes das colunas desejados.
+
+Para isso, basta criar cada vetor coluna com o nomes escolhido.
+```R
+
+```
 
 
 
