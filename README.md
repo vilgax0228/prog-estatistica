@@ -2,7 +2,7 @@
 
 Uma função muito usada com objetos da classe *character* é a função **paste()**.
 
-Ela recebe como argumento de entrada objetos do tipo "character" e retorna um *único* objeto, também do tipo character, que é definido pela *concatenação* dos objetos passados como entrada.
+Ela recebe como argumento de entrada objetos do tipo character e retorna um *único* objeto, também do tipo character, que é definido pela *concatenação* dos objetos passados como entrada.
 
 Quando chamamos o comando paste() podemos indicar como os objetos serão separados na concatenação usando o argumento de entrada *sep*. Se este argumento não for definido, ele será considerado como espaço.
 ```R
@@ -14,7 +14,7 @@ Quando chamamos o comando paste() podemos indicar como os objetos serão separad
 [1] "abc"
 ```
 
-Operadores lógicos **&**(E) e **|**(OU):
+Operadores lógicos **&** (E) e **|** (OU):
 ```R
 > A <- TRUE
 > B <- FALSE
@@ -446,14 +446,14 @@ Para criar um novo objeto do tipo *data.frame* podemos usar a função **data.fr
 
 **obs:** cada vetor que define uma coluna tem que ter a mesma dimensão, que será o número de linhas do objeto data.frame criado.
 ```R
-> dados <- data.frame(c("Maria", "Daniel", "Vicente", "Laura"), c(4, 5, 1, 3), c(F, F, F, T), stringsAsFactors=FALSE)
+> dados <- data.frame(c("Maria", "Fiona", "Carmen", "Laura"), c(4, 5, 1, 3), c(F, F, F, T), stringsAsFactors=FALSE)
 > class(dados)
 [1] "data.frame"
 > dados
-  c..Maria....Daniel....Vicente....Laura.. c.4..5..1..3. c.F..F..F..T.
+  c..Maria....Fiona....Carmen....Laura.. c.4..5..1..3. c.F..F..F..T.
 1                                    Maria             4         FALSE
-2                                   Daniel             5         FALSE
-3                                  Vicente             1         FALSE
+2                                    Fiona             5         FALSE
+3                                   Carmen             1         FALSE
 4                                    Laura             3          TRUE
 ```
 Foi criado o objeto dados do tipo data.frame.
@@ -465,7 +465,7 @@ Para nomear as colunas, ou editar seus nomes, e assim facilitar a manipulação 
 Essa função serve tanto para retornar os nomes das colunas de um objeto data.frame quanto para editá-los.
 ```R
 > names(dados)
-[1] "c..Maria....Daniel....Vicente....Laura.."
+[1] "c..Maria....Fiona....Carmen....Laura.."
 [2] "c.4..5..1..3."                           
 [3] "c.F..F..F..T."
 
@@ -476,18 +476,57 @@ Essa função serve tanto para retornar os nomes das colunas de um objeto data.f
 > dados
      nome periodo res.niteroi
 1   Maria       4       FALSE
-2  Daniel       5       FALSE
-3 Vicente       1       FALSE
+2   Fiona       5       FALSE
+3  Carmen       1       FALSE
 4   Laura       3        TRUE
 ```
 
 Uma alternativa seria criar o objeto data.frame já com os nomes das colunas desejados.
 
-Para isso, basta criar cada vetor coluna com o nomes escolhido.
+Para isso, basta criar cada vetor coluna com o nome escolhido.
 ```R
+> nome <- c("Maria", "Raphaela", "Carmen", "Laura")
+> periodo <- c(1, 2, 1, 0)
+> res.niteroi <- c(F, T, F, T)
+> dados <- data.frame(nome, periodo, res.niteroi, stringsAsFactors=FALSE)
+> dados
+     nome periodo res.niteroi
+1   Maria       1       FALSE
+2   Fiona       2        TRUE
+3  Carmen       1       FALSE
+4   Laura       0        TRUE
 
+> names(dados)
+[1] "nome"        "periodo"     "res.niteroi"
+```
+Outra forma ainda de fazer a mesma coisa:
+```R
+> dados <- data.frame(nome=c("Maria", "Fiona", "Carmen", "Laura"), periodo=c(1, 2, 1, 0), res.niteroi=c(F, T, F, T), stringsAsFactors=FALSE)
+> dados
+    nome periodo res.niteroi
+1   Maria       1       FALSE
+2   Fiona       2        TRUE
+3  Carmen       1       FALSE
+4   Laura       0        TRUE
+
+> names(dados)
+[1] "nome"        "periodo"     "res.niteroi"
 ```
 
+Cada elemento de um objeto data.frame pode ser acessado usando o comando colchetes [,] e indicando antes da vírgula o índice da linha e depois da vírgula o índice da coluna.
+```R
+> dados[1,1]
+[1] "Maria"
+> dados[3,2]
+[1] 1
+```
+Com o comando [,] também é possível acessar uma linha ou coluna inteira, nesse caso você deve indicar somente o índice da linha, para acessar uma linha, ou somente o índice da coluna, para acessar uma coluna.
+```R
+> dados[2,]
+2 Fiona       2        TRUE
+> dados[,3]
+[1] FALSE  TRUE FALSE  TRUE
+```
 
 
 ---
@@ -563,3 +602,109 @@ linha2   20    6    1   10    6
 > dim(B%*%A)
 [1] 3 3
 ```
+
+
+
+---
+## Capítulo 2: Controle de fluxo
+
+**If/else**
+
+*Sintaxe:*
+```R
+if (condicao){
+  # comandos caso condicao seja verdadeira
+} else {
+  # comandos caso condicao seja falsa
+}
+```
+ou
+```R
+if (condicao){
+  # comandos caso condicao seja verdadeira
+}
+```
+Dentro do par de parênteses seguidos do **if** tem que ter um objeto do tipo *logical*.
+
+Os comandos dentro do primeiro par de chaves serão executados caso o objeto condicao seja TRUE.
+
+Caso contrário, os comandos de dentro do par de chaves depois do **else** serão executados.
+
+O comando else é opcional, e no caso de o else não aparecer, nada será executado caso o objeto condicao seja FALSE.
+
+Vejamos um primeiro exemplo em que um texto é impresso na tela, o que será impresso depende do valor guardado na variável x.
+```R
+> x <- 2
+> if(x < 5){
+  print(paste(x, "e menor que", 5))
+} else{
+  print(paste(x, "e maior ou igual a", 5))
+}
+[1] "2 e menor que 5"
+```
+A função *print()* é responsável por imprimir na tela, e a função paste() por concatenar textos e criar um único objeto do tipo character.
+
+Se a variável x receber um valor maior que 5 o texto impresso é outro.
+```R
+> x <- 8
+> if(x < 5){
+  print(paste(x, "e menor que", 5))
+} else{
+  print(paste(x, "e maior ou igual a", 5))
+}
+[1] "8 e maior ou igual a 5"
+```
+
+Outro exemplo simples:
+```R
+> x <- 3
+> if(x > 2){
+  y <- 2*x
+} else{
+  y <- 3*x
+}
+> print(y)
+[1] 6
+```
+O controle de fluxo if/else será usado na maioria das vezes dentro de funções, como veremos no próximo capítulo (3).
+
+**for**
+
+*Sintaxe:*
+```R
+> for(i in valores){
+  # comandos que em geral dependem do valor de i
+}
+```
+Dentro do par de parênteses valores, é um vetor de objetos, que pode ser de qualquer tipo.
+
+Os comandos de dentro do par de chaves serão executados, repetidamente, e em cada iteração o objeto **i** vai assumir o valor diferente, valores esses guardados no vetor valores.
+
+O **for** é o primeiro exemplo de um controle de fluxo que executa uma estrutura de repetição, conhecida como laço (*loop*).
+```R
+> y <- 0
+> for(i in 1:10){
+  y <- y+1
+}
+> print(y)
+[1] 10
+```
+Veja que y começa com o valor 0.
+
+Quando i = 1, y é incrementado de 1 unidade e passa a guardar o valor 0 + 1 = 1, e assim por diante até que temos i = 10, quando y recebe seu último incremento e passa a guardar o valor 10.
+
+Outro exemplo:
+```R
+> x <- 3
+> for(var in 2:5){
+  x <- x+var
+}
+> print(x)
+[1] 17
+```
+Veja que x começa guardando o valor 3.
+
+Na primeira iteração do for, a variável *var* assume o valor 2 e dessa forma o valor de x é atualizado para 3 + 2 = 5.
+
+Na segunda iteração, var assume o valor 3 e assim o valor de x é atualizado para 5 + 3 = 8 e assim por diante até que x passa a assumir o valor 17.
+
