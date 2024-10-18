@@ -14,7 +14,7 @@ Quando chamamos o comando paste() podemos indicar como os objetos serão separad
 [1] "abc"
 ```
 
-Operadores lógicos **&** (E) e **|** (OU):
+Operadores lógicos & (e) e | (ou):
 ```R
 > A <- TRUE
 > B <- FALSE
@@ -23,16 +23,13 @@ Operadores lógicos **&** (E) e **|** (OU):
 > A|B
 [1] TRUE
 ```
-Também podemos realizar a negação desses objetos usando o comando **!**.
+Também podemos realizar a negação desses objetos usando o comando !.
 ```R
 > negA <- !A
 > negA
 [1] FALSE
-> negB <- !B
-> negB
-[1] TRUE
 ```
-Se quisermos testar se dois objetos são iguais ou diferentes, podemos usar os operadores **==** ou **!=**.
+Se quisermos testar se dois objetos são iguais ou diferentes, podemos usar os operadores == ou !=.
 ```R
 > a <- 1
 > b <- 1
@@ -40,8 +37,6 @@ Se quisermos testar se dois objetos são iguais ou diferentes, podemos usar os o
 > d <- "2"
 > a==b
 [1] TRUE
-> a!=b
-[1] FALSE
 > a!=c
 [1] TRUE
 > a==d
@@ -67,18 +62,14 @@ Podemos ainda usar os operadores (**+, -, *, /**) entre objetos do tipo *logical
 
 Nesse caso, os objetos iguais a TRUE serão interpretados como o número 1 e os iguais a FALSE como 0.
 ```R
-> V_1 <- TRUE
-> V_2 <- TRUE
-> F_1 <- FALSE
-> F_2 <- FALSE
+> V_1 <- TRUE; V_2 <- TRUE
+> F_1 <- FALSE; F_2 <- FALSE
 > V_1 + V_2
 [1] 2
 > V_1 - V_2
 [1] 0
 > F_1 * V_2
 [1] 0
-> V_1 * V_2
-[1] 1
 > F_1 / V_2
 [1] 0
 > V_1 / F_1
@@ -103,9 +94,9 @@ Nesse caso, os objetos iguais a TRUE serão interpretados como o número 1 e os 
 [1] 12
 ```
 
-**Vetores**
+### Vetores
 
-No R um **vetor** é uma *estrutura de dados* que armazena uma coleção de objetos em que todos são de uma mesma classe.
+No R um *vetor* é uma *estrutura de dados* que armazena uma coleção de objetos em que todos são de uma mesma classe.
 
 A maneira mais simples de se criar um vetor é usando a função **c()**, que combina objetos formando um vetor.
 ```R
@@ -117,7 +108,7 @@ A maneira mais simples de se criar um vetor é usando a função **c()**, que co
 [1] "a" "b"
 > c <- c(T, T, F, F)
 > c
-[1] TRUE  TRUE FALSE FALSE
+[1]  TRUE  TRUE FALSE FALSE
 ```
 O R trata qualquer objeto como um vetor.
 
@@ -139,13 +130,12 @@ Para acessarmos a posição (*index*) de um vetor usamos os colchetes [].
 > c[3]
 [1] FALSE
 ```
-Se tentamos acessar uma posição que não tenha sido definida, a resposta será *NA* (not available).
+Se tentamos acessar uma posição que não tenha sido definida, a resposta será NA (*not available*).
 ```R
 > a[5]
 [1] NA
 ```
-Existem outras maneiras de se criar um vetor.
-
+Existem outras maneiras de se criar um vetor.  
 Uma delas é usando o colchetes [] para alocarmos uma posição específica.
 ```R
 > d <- 1
@@ -160,7 +150,7 @@ Uma delas é usando o colchetes [] para alocarmos uma posição específica.
 > d
 [1] 1 3 5 7
 ```
-No exemplo anterior o objeto *d* foi iniciado como um vetor de tamanho 1 da classe "numeric".
+No exemplo anterior o objeto *d* foi iniciado como um vetor de tamanho 1 da classe *numeric*.
 
 Temos também a possibilidade de iniciar um objeto como vazio ou nulo.
 ```R
@@ -191,24 +181,24 @@ A função c() serve não só para concatenar objetos em um vetor, como também 
 > e
 [1] 2 4
 > c(a, e)  # concatenando dois vetores
-[1] 0 1 2 3 4 2 4
+[1] 1 2 3 2 4
 
 > b <- c("a", "b")
 > b
 [1] "a" "b"
 > c(a, b)  # concatenando dois vetores de classes diferentes, uma delas é transformada por coerção
-[1] "0" "1" "2" "3" "4" "a" "b"
+[1] "1" "2" "3" "a" "b"
 ```
 **obs:** aqui nesse caso, é mais fácil de se transformar números em strings que strings de texto em números.
 
 Temos ainda outras maneiras de criar um vetor:
 ```R
 > 1:10
-[1] 1 2 3 4 5 6 7 8 9 10
+[1]  1  2  3  4  5  6  7  8  9 10
 > seq(1, 20, by=2)
-[1] 1  3  5  7  9 11 13 15 17 19
-> rep(0, times=0)
-[1] 0 0 0 0
+[1]  1  3  5  7  9 11 13 15 17 19
+> rep(0, times=2)
+[1] 0 0
 ```
 
 Uma última maneira de se iniciar um vetor quando já se sabe o tipo, mas ainda não sabemos os elementos:
@@ -231,7 +221,7 @@ Os operadores e funções são aplicados a cada posição do vetor e retornam um
 > a <- seq(1:10)
 > b <- rep(2, 10)
 > a
-[1] 1 2 3 4 5 6 7 8 9 10
+[1]  1  2  3  4  5  6  7  8  9 10
 > b
 [1] 2 2 2 2 2 2 2 2 2 2
 > a+b
@@ -259,7 +249,7 @@ Outros exemplos:
 [1]  TRUE FALSE FALSE
 ```
 
-**Matrizes**
+### Matrizes
 
 Dentro do R existe uma classe chamada *matrix*, que guarda objetos do mesmo tipo em forma de matriz, ou seja, guarda os objetos por linhas e colunas.
 
@@ -322,7 +312,7 @@ Se quisermos o número de linhas de uma matriz , podemos usar a função nrow(),
 [1] 2
 ```
 
-**Listas**
+### Listas
 
 Um objeto da classe *list* se diferencia de um vetor pelo fato de poder guardar objetos de tipos diferentes. Além disso, as listas definem uma classe, e um vetor não.
 
@@ -436,7 +426,7 @@ Além de alocar novas posições, ele também serve para modificar posições j�
 [1] 1 4 8
 ```
 
-**Data frame**
+### Data frame
 
 Trata-se de um objeto que guarda dados em forma bidimensional, como uma tabela.
 
@@ -527,6 +517,8 @@ Com o comando [,] também é possível acessar uma linha ou coluna inteira, ness
 > dados[,3]
 [1] FALSE  TRUE FALSE  TRUE
 ```
+
+
 
 
 ---
