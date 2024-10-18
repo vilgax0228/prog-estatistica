@@ -304,7 +304,7 @@ Podemos usar os colchetes ainda para acessar uma linha inteira ou coluna inteira
 > m3[,2]
 [1] 11 12 13
 ```
-Se quisermos o número de linhas de uma matriz , podemos usar a função nrow(), e se quisermos o número de coluns usamos a função ncol().
+Se quisermos o número de linhas de uma matriz , podemos usar a função *nrow()*, e se quisermos o número de colunas usamos a função *ncol()*.
 ```R
 > nrow(m3)
 [1] 3
@@ -322,7 +322,7 @@ Para criarmos uma lista vamos usar a função **list()**:
 > l1
 list()
 ```
-O objeto l1 criado representa uma lista vazia.
+O objeto *l1* criado representa uma lista vazia.
 
 Se dentro dos parênteses colocarmos uma sequência de objetos, a lista criada será composta por tais objetos.
 ```R
@@ -395,7 +395,7 @@ Enquanto usamos colchetes simples [] para acessar a posição de um vetor, para 
 [1] 2
 ```
 
-Para saber o tamanho de uma lista, também podemos usar o comando length().
+Para saber o tamanho de uma lista, também podemos usar o comando *length()*.
 ```R
 > length(l1)
 [1] 0
@@ -411,7 +411,7 @@ Da mesma forma que em um vetor, novas posições de uma lista podem ser alocadas
 
 Além de alocar novas posições, ele também serve para modificar posições já existentes.
 ```R
-> l2[[4]] <- c(1, 2, 3)
+> l2[[4]] <- c(1, 4, 8)
 > l2
 [[1]]
 [1] 1
@@ -527,9 +527,9 @@ Com o comando [,] também é possível acessar uma linha ou coluna inteira, ness
 ---
 **Exercícios versão professor - Capítulo 1: Classes e Objetos**
 
-1. uso da função *rbind()* para criar a matriz A. Depois use as funções *rownames()* e *colnames()* e dê os seguintes nomes as linhas: linha1 (para a primeira linha), e linha2(para a segunda linha), faça o mesmo para as colunas usando os nomes: col1, col2, etc.
+1.
 ```R
-> A = rbind(c(14, 1, 8, 2, 17), c(20, 6, 1, 10, 6))
+> A <- rbind(c(14, 1, 8, 2, 17), c(20, 6, 1, 10, 6))
 > A
       [,1] [,2] [,3] [,4] [,5]
 [1,]    14    1    8    2   17
@@ -542,15 +542,15 @@ Com o comando [,] também é possível acessar uma linha ou coluna inteira, ness
 linha1   14    1    8    2   17
 linha2   20    6    1   10    6
 ```
-2. Use a função *cbind()* para criar a matriz A do exercício anterior.
+2.
 ```R
-> A = cbind(c(14, 20), c(1, 6), c(8, 1), c(2, 10), c(17, 6))
-> A
+> B = cbind(c(14, 20), c(1, 6), c(8, 1), c(2, 10), c(17, 6))
+> B
      [,1] [,2] [,3] [,4] [,5]
 [1,]   14    1    8    2   17
 [2,]   20    6    1   10    6
 ```
-3. Usando o comando *:* e a função *matrix()* crie a matriz.
+3.
 ```R
 > m <- matrix(1:36, nrow=6, ncol=6)
 > m
@@ -562,7 +562,7 @@ linha2   20    6    1   10    6
 [5,]    5   11   17   23   29   35
 [6,]    6   12   18   24   30   36
 ```
-4. Crie as matrizes A e B e use o operador %*% que fornece a multiplicação entre duas matrizes.
+4.
 ```R
 > A <- c(3, -1, 0, -3, -5, 4)
 > dim(A) <- c(2, 3)
@@ -583,7 +583,7 @@ linha2   20    6    1   10    6
 [1,]  -25    3
 [2,]   -2    5
 ```
-5. A função *dim()* retorna a dimensão de uma matriz. Usando as matrizes A e B do exercício anterior, obtenha a dimensão de A, de B, de AB e de BA.
+5.
 ```R
 > dim(A)
 [1] 2 3
