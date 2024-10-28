@@ -475,7 +475,7 @@ Uma alternativa seria criar o objeto data.frame já com os nomes das colunas des
 
 Para isso, basta criar cada vetor coluna com o nome escolhido.
 ```R
-> nome <- c("Maria", "Raphaela", "Carmen", "Laura")
+> nome <- c("Maria", "Fiona", "Carmen", "Laura")
 > periodo <- c(1, 2, 1, 0)
 > res.niteroi <- c(F, T, F, T)
 > dados <- data.frame(nome, periodo, res.niteroi, stringsAsFactors=FALSE)
@@ -493,7 +493,7 @@ Outra forma ainda de fazer a mesma coisa:
 ```R
 > dados <- data.frame(nome=c("Maria", "Fiona", "Carmen", "Laura"), periodo=c(1, 2, 1, 0), res.niteroi=c(F, T, F, T), stringsAsFactors=FALSE)
 > dados
-    nome periodo res.niteroi
+     nome periodo res.niteroi
 1   Maria       1       FALSE
 2   Fiona       2        TRUE
 3  Carmen       1       FALSE
@@ -518,14 +518,39 @@ Com o comando [,] também é possível acessar uma linha ou coluna inteira, ness
 [1] FALSE  TRUE FALSE  TRUE
 ```
 
+Também é possível acessar cada coluna usando o comando $ seguido pelo nome da coluna.
+```R
+> dados$nome
+[1] "Maria"  "Fiona"  "Carmen" "Laura"
+> dados$periodo
+[1] 1 2 1 0
+```
+
+As funções nrow() e ncol() também podem ser usadas para retornar o número de linhas e colunas de um objeto do tipo data.frame.
+```R
+> ncol(dados)
+[1] 3
+> nrow(dados)
+[1] 4
+```
+
+Vejamos agora como incluir novos dados em um objeto do tipo data.frame já criado. Com o comando $ é possível adicionar uma nova coluna.
+```R
+> dados$curso = c("estatistica", "engenharia", "matematica", "engenharia")
+> dados
+    nome periodo res.niteroi       curso
+1  Maria       1       FALSE estatistica
+2  Fiona       2        TRUE  engenharia
+3 Carmen       1       FALSE  matematica
+4  Laura       0        TRUE  engenharia
+```
+
+Para adicionar uma nova linha
 
 
 
 ---
-**Exercícios versão livro - Capítulo 1: Classes e Objetos**
-
----
-**Exercícios versão professor - Capítulo 1: Classes e Objetos**
+**Exercícios do professor - Capítulo 1: Classes e Objetos**
 
 1.
 ```R
@@ -670,7 +695,7 @@ O controle de fluxo if/else será usado na maioria das vezes dentro de funções
 ```
 Dentro do par de parênteses valores, é um vetor de objetos, que pode ser de qualquer tipo.
 
-Os comandos de dentro do par de chaves serão executados, repetidamente, e em cada iteração o objeto **i** vai assumir o valor diferente, valores esses guardados no vetor valores.
+Os comandos de dentro do par de chaves serão executados, repetidamente, e em cada iteração o objeto **i** vai assumir um valor diferente, valores esses guardados no vetor valores.
 
 O **for** é o primeiro exemplo de um controle de fluxo que executa uma estrutura de repetição, conhecida como laço (*loop*).
 ```R
@@ -698,5 +723,15 @@ Veja que x começa guardando o valor 3.
 
 Na primeira iteração do for, a variável *var* assume o valor 2 e dessa forma o valor de x é atualizado para 3 + 2 = 5.
 
-Na segunda iteração, var assume o valor 3 e assim o valor de x é atualizado para 5 + 3 = 8 e assim por diante até que x passa a assumir o valor 17.
+Na segunda iteração, var assume o valor 3 e assim o valor de x é atualizado para 5 + 3 = 8 e assim por diante até que x passa a assumir o valor final 17.
+
+O exemplo a seguir apresenta valores não numéricos para a variável de dentro do for.
+```R
+> alfabeto <- NULL
+> for (a in LETTERS){
+    alfabeto = paste(alfabeto, a)
+}
+> print(alfabeto)
+[1] " A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"
+```
 
