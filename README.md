@@ -735,3 +735,103 @@ O exemplo a seguir apresenta valores não numéricos para a variável de dentro 
 [1] " A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"
 ```
 
+Para terminar os exemplos sobre o comando de fluxo for, vamos apresentar alguns exemplos em que dois for são combinados, um dentro do outro.
+
+Suponha que temos uma matrix 5x5 cheia de zeros e queremos preencher cada posição dessa matriz com o número 1:
+```R
+M <- matrix(0, nrow=5, ncol=5)
+for(i in 1:5){
+  for(j in 1:5){
+    M[i,j] <- 1
+  }
+}
+> M
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    1    1    1    1    1
+[2,]    1    1    1    1    1
+[3,]    1    1    1    1    1
+[4,]    1    1    1    1    1
+[5,]    1    1    1    1    1
+```
+E se quiséssemos preencher cada posição de uma matriz com o número que indica a sua linha?
+```R
+M <- matrix(0, nrow=5, ncol=5)
+for(i in 1:5){
+  for(j in 1:5){
+    M[i, j] <- i
+  }
+}
+> M
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    1    1    1    1    1
+[2,]    2    2    2    2    2
+[3,]    3    3    3    3    3
+[4,]    4    4    4    4    4
+[5,]    5    5    5    5    5
+```
+
+**While**
+
+Sintaxe:
+```R
+while (condicao) {
+  # comandos
+}
+```
+
+Dentro do par de parentêses seguidos do while, tem que ter um objeto do tipo logical. Os comandos dentro do primeiro par de chaves serão executados repretidamente enquanto a condição for verdadeira.
+
+É importante garantir que em algum momento a condição seja falsa, se não teremos um loop infinito.
+
+A sequência de comandos a seguir usa o controle de fluxo while para criar um vetor com os números de 1 até 100:
+```R
+vetor <- 1
+while(length(vetor) < 100){
+  i <- length(vetor)
+  vetor[i+1] <- i+1
+}
+> vetor
+  [1]   1   2   3   4   5   6   7
+  [8]   8   9  10  11  12  13  14
+ [92]  92  93  94  95  96  97  98
+ [99]  99 100
+```
+
+Podemos usar o while para criar um vetor com os números pares entre 1 e 100:
+```R
+vetor <- NULL
+i = 1
+while(i<50){
+  vetor <- c(vetor, 2*i)
+  i <- i+1
+}
+> vetor
+ [1]  2  4  6  8 10 12 14 16 18 20
+[11] 22 24 26 28 30 32 34 36 38 40
+[21] 42 44 46 48 50 52 54 56 58 60
+[31] 62 64 66 68 70 72 74 76 78 80
+[41] 82 84 86 88 90 92 94 96 98
+```
+
+**Repeat/break**
+
+Sintaxe:
+```R
+> repeate{
+  # comandos
+  if (condicao)
+    break
+}
+```
+
+
+
+
+
+
+
+
+
+
+---
+## Capítulo 3: Funções e o conceito de variável local
