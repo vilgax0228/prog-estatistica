@@ -549,83 +549,13 @@ Para adicionar uma nova linha
 
 
 
----
-**Exercícios do professor - Capítulo 1: Classes e Objetos**
-
-1.
-```R
-> A <- rbind(c(14, 1, 8, 2, 17), c(20, 6, 1, 10, 6))
-> A
-      [,1] [,2] [,3] [,4] [,5]
-[1,]    14    1    8    2   17
-[2,]    20    6    1   10    6
-
-> rownames(A) <- c("linha1", "linha2")
-> colnames(A) <- c("col1", "col2", "col3", "col4", "col5")
-> A
-       col1 col2 col3 col4 col5
-linha1   14    1    8    2   17
-linha2   20    6    1   10    6
-```
-2.
-```R
-> B = cbind(c(14, 20), c(1, 6), c(8, 1), c(2, 10), c(17, 6))
-> B
-     [,1] [,2] [,3] [,4] [,5]
-[1,]   14    1    8    2   17
-[2,]   20    6    1   10    6
-```
-3.
-```R
-> m <- matrix(1:36, nrow=6, ncol=6)
-> m
-     [,1] [,2] [,3] [,4] [,5] [,6]
-[1,]    1    7   13   19   25   31
-[2,]    2    8   14   20   26   32
-[3,]    3    9   15   21   27   33
-[4,]    4   10   16   22   28   34
-[5,]    5   11   17   23   29   35
-[6,]    6   12   18   24   30   36
-```
-4.
-```R
-> A <- c(3, -1, 0, -3, -5, 4)
-> dim(A) <- c(2, 3)
-> A
-     [,1] [,2] [,3]
-[1,]    3    0   -5
-[2,]   -1   -3    4
-
-> B <- matrix(c(-5, 5, 2, 1, -2, 0), nrow=3, ncol=2)
-> B
-     [,1] [,2]
-[1,]   -5    1
-[2,]    5   -2
-[3,]    2    0
-
-> A%*%B
-     [,1] [,2]
-[1,]  -25    3
-[2,]   -2    5
-```
-5.
-```R
-> dim(A)
-[1] 2 3
-> dim(B)
-[1] 3 2
-> dim(A%*%B)
-[1] 2 2
-> dim(B%*%A)
-[1] 3 3
-```
 
 
 
 ---
 ## Capítulo 2: Controle de fluxo
 
-**If/else**
+### If/else
 
 *Sintaxe:*
 ```R
@@ -685,7 +615,7 @@ Outro exemplo simples:
 ```
 O controle de fluxo if/else será usado na maioria das vezes dentro de funções, como veremos no próximo capítulo (3).
 
-**for**
+### for
 
 *Sintaxe:*
 ```R
@@ -770,7 +700,7 @@ for(i in 1:5){
 [5,]    5    5    5    5    5
 ```
 
-**While**
+### while
 
 Sintaxe:
 ```R
@@ -813,7 +743,7 @@ while(i<50){
 [41] 82 84 86 88 90 92 94 96 98
 ```
 
-**Repeat/break**
+### Repeat/break
 
 Sintaxe:
 ```R
@@ -835,3 +765,140 @@ Sintaxe:
 
 ---
 ## Capítulo 3: Funções e o conceito de variável local
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+## Capítulo 4: Algoritmos para cálculos estatísticos
+
+Serão apresentados e discutidos alguns pseudocódigos.  
+A maioria das funções que serão implementadas nesta seção já estão prontas no R; mas não vamos usar estas, e sim criar as nossas próprias funções.
+
+### Máximo
+Queremos escrever um pseudocódigo que recebe como entrada um vetor de dados e retorna o seu máximo.
+
+A ideia principal do algoritmo apresentado a seguir é percorrer um vetor guardando o maior elemento encontrado até o momento. O algoritmo termina quando o vetor já foi percorrido por completo.
+
+Entrada: v = vetor com os dados
+Saída: valor máximo em v
+
+1. Defina n como o tamanho do vetor v;
+2. Faça max = v[1];
+3. Inicie i=2;
+4. Se v[i]>max, max=v[i];
+5. Incremente i: i=i+1;
+6. Se i<=n, volta para a linha 4;
+7. Retorne max.
+
+Na linha 2, a variável max guarda o primeiro elemento do vetor, pois no início do algoritmo esse é o único valor observado, logo é o máximo até o momento.
+
+Na linha 4, acontece a troca do valor guardado em max, caso o novo valor observado seja maior que o máximo até o momento.
+
+```R
+encontrar_maximo<-function(v){
+  n<-length(v)
+  max<-v[1]
+  i<-2
+  while(i<=n){
+     if(v[i]>max){
+       max<-v[i]
+     }
+     i<-i+1
+  }
+  return(max)
+}
+encontrar_maximo(c(1,8,2,7))
+[1] 8
+```
+
+### Mínimo
+A mesma coisa do anterior, só que retorna o valor mínimo.
+
+```R
+
+```
+
+### Média amostral
+Queremos agora escrever um pseudocódigo que recebe como entrada um vetor de dados e retorna a sua média.
+
+A ideia principal será percorrer o vetor v somando os seus elementos um a um. Quando v já estiver sido percorrido por completo, basta dividir a soma final pelo número total de elementos que encontraremos a média.
+
+Entrada: v = vetor com os dados
+Saída: a média amostral dos valores de v
+
+1. Defina n como o tamanho do vetor v;
+2. Inicie soma=0;
+3. Inicie i=1;
+4. Incremente a variável soma: soma=soma+v[i];
+5. Incremente a variável i: i=i+1;
+6. Se i<=n, volte para o passo 4;
+7. Faça média=soma/n;
+8. Retorne média.
+
+```R
+media_amostral<-function(v){
+  n<-length(v)
+  soma<-0
+  media<-0
+  i<-1
+  while(i<=n){
+     soma<-soma+v[i]
+     i<-i+1
+  }
+  media<-soma/n
+  return(media)
+}
+media_amostral(c(2,6,7))     # 2+6+7=15, 15/3=5, 3=n
+[1] 5
+```
+
+### Mediana
+Queremos agora escrever um pseudocódigo que recebe como entrada um vetor de dados e retorna a sua mediana.
+
+Entrada: v = vetor com os dados
+Saída: a mediana dos valores de v
+
+1. Defina n como o tamanho do vetor v;
+2. Defina v_o como o vetor v ordenado;
+3. Se n é ímpar, faça mediana = v_o=[(n+1)/2];
+4. Se n é par, faça mediana = (v_o=[n/2] + v_o=[(n/2)+1])/2;
+5. Retorne mediana.
+
+Veja que nesse algoritmo não temos a existência de laços.
+
+Na linha 2 o vetor v é ordenado. Ainda não aprendemos como ordenar vetores e por isso usaremos a função *sort* para isso.
+
+### Quartis
+
+
+
+
+
+
+---
+## Capítulo 5:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
