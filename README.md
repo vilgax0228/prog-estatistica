@@ -766,11 +766,64 @@ Sintaxe:
 ---
 ## Capítulo 3: Funções e o conceito de variável local
 
+### Funções
 
+Para definir uma função é preciso definir os seguintes itens:
 
+* nome da função;
+* argumentos (entrada);
+* sequência de comandos (corpo);
+* retorno (saída).
 
+Depois que uma função é definida para executar a sua sequência de comandos, basta chamá-la pelo nome, passando os argumentos de entrada.
 
+Para definir uma nova função no R, deve ser usada a seguinte sintaxe:
+```R
+nome_da_funcao <- function(argumentos){
+  # sequencia de comandos
+  return(saida)
+}
+```
 
+| Nome | Descrição |
+| --- | --- |
+| Argumentos | Define as variáveis cujos valores serão atribuídos pelo usuário quando a função for chamada |
+| Corpo da função | Contém os cálculos e tarefas executadas pela função |
+| Retorno | Indica qual é o valor que a função retorna como saída |
+
+Vejamos alguns exemplos.
+
+Primeiro vamos construir uma função que retorna o maior entre dois valores passados como argumentos. Essa função já existe pronta no R e se chama max().
+
+```R
+maior <- function(a,b){
+  if(a>b){
+     return(a)
+  else
+     return(b)
+}
+```
+
+Depois disso podemos chamá-la:
+```R
+> maior(3,2)
+[1] 3
+```
+
+Também podemos optar por guardar a saída da função em uma variável, o que pode ser bastante útil.
+```R
+> x <- maior(-5,-3)
+> y <- 2*x
+> x
+[1] -3
+> y
+[1] -6
+```
+
+E se quiséssemos encontrar o maior entre três números?
+```R
+
+```
 
 
 
