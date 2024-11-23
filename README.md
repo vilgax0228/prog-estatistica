@@ -545,12 +545,22 @@ Vejamos agora como incluir novos dados em um objeto do tipo data.frame já criad
 4  Laura       0        TRUE  engenharia
 ```
 
-Para adicionar uma nova linha
+Para adicionar uma nova linha, é preciso primeiro criar um objeto do tipo data.frame com os dados da nova linha e então juntar os dois objetos do tipo data.frame em um único objeto com a função rbind().
 
-
-
-
-
+```R
+> nova_linha <- data.frame(nome="Filipe",periodo=3,res.niteroi=F,curso="estatistica",stringsAsFactors=FALSE)
+> nova_linha
+    nome periodo res.niteroi       curso
+1 Filipe       3       FALSE estatistica
+> dados <- rbind(dados,nova_linha)
+> dados
+    nome periodo res.niteroi       curso
+1  Maria       1       FALSE estatistica
+2  Fiona       2        TRUE  engenharia
+3 Carmen       1       FALSE  matematica
+4  Laura       0        TRUE  engenharia
+5 Filipe       3       FALSE estatistica
+```
 
 ---
 ## Capítulo 2: Controle de fluxo
@@ -615,7 +625,7 @@ Outro exemplo simples:
 ```
 O controle de fluxo if/else será usado na maioria das vezes dentro de funções, como veremos no próximo capítulo (3).
 
-### for
+### For
 
 *Sintaxe:*
 ```R
@@ -700,7 +710,7 @@ for(i in 1:5){
 [5,]    5    5    5    5    5
 ```
 
-### while
+### While
 
 Sintaxe:
 ```R
@@ -754,14 +764,54 @@ Sintaxe:
 }
 ```
 
+Este controle de fluxo é muito semelhante ao while.
 
+A diferença é que o while executa os comandos enquanto uma certa condição for verdadeira, já o repeat executa os comandos até que uma certa condição se torne verdadeira.
 
+Por exemplo, também podemos usar o repeat/break para criar um vetor com os 100 primeiros inteiros:
+```R
+y <- 1
+i <- 1
+repeate{
+  i <- i+1
+  y[i] <- i
+  if(i==100)
+     break
+}
+```
 
+Novamente o exemplo que vimos implementado com for agora com repeat/break, em que criamos um character com as letras do alfabeto na ordem inversa.
+```R
+alfabeto <- NULL
+i <- 1
+repeat{
+  a <- LETTERS[i]
+  alfabeto <- paste(a,alfabeto)
+  i <- i+1
+  if(i > length(LETTERS)
+     break
+}
+```
 
+Para terminar, veja um exemplo em que é usado um controle de fluxo dentro do outro.
 
-
-
-
+Nele será criada uma lista com 5 posições. Em cada posição i teremos uma matriz ixi que guarda na diagonal principal o seu índice dentro da lista.
+```R
+l <- list()
+i <- 1
+while(i <= 5){
+  D <- matrix(0,i,i)
+  j <- 1
+  repeat{
+     D[j,j] <- i
+     j <- j+1
+     if(j > i)
+       break
+  }
+  l[[i]] <- D
+  i <- i+1
+} 
+```
 
 ---
 ## Capítulo 3: Funções e o conceito de variável local
